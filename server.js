@@ -5,7 +5,7 @@ const app = express();
 
 const appId = '1291328168557869'; // Your App ID
 const appSecret = 'a5ba95bf812779d0d43c946dd18dad13'; // Your App Secret
-const redirectUri = 'https://bb37-109-166-130-233.ngrok-free.app/redirect'; // Your redirect URI
+const redirectUri = 'https://3834-89-238-211-222.ngrok-free.app/redirect'; // Your redirect URI
 
 // Serve static files (HTML)
 app.use(express.static(path.join(__dirname, 'public')));

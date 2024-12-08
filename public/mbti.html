@@ -4,26 +4,47 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MBTI Result</title>
+  <link rel="stylesheet" href="mbti.css">
 </head>
-<body>
-  <h1>Your MBTI Type</h1>
-  <p id="mbtiResult"></p>
-  <h2>Recommended Careers</h2>
-  <ul id="jobsList"></ul>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const mbtiType = urlParams.get('mbti');
-    document.getElementById('mbtiResult').textContent = mbtiType 
-      ? `Your MBTI type is: ${mbtiType}`
-      : "No MBTI type found.";
+  <body>
+    <h1>Your MBTI Type</h1>
+    <p id="mbtiResult"></p>
+    <h2>Recommended Careers</h2>
+    <ul id="jobsList"></ul>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const mbtiType = urlParams.get('mbti');
+      document.getElementById('mbtiResult').textContent = mbtiType 
+        ? `Your MBTI type is: ${mbtiType}`
+        : "No MBTI type found.";
 
-    const recommendedJobs = JSON.parse(sessionStorage.getItem('recommendedJobs')) || [];
-    const jobsList = document.getElementById('jobsList');
-    recommendedJobs.forEach(job => {
-      const li = document.createElement('li');
-      li.textContent = job;
-      jobsList.appendChild(li);
-    });
-  </script>
-</body>
+      const recommendedJobs = JSON.parse(sessionStorage.getItem('recommendedJobs')) || [];
+      const jobsList = document.getElementById('jobsList');
+
+      // Clear previous content
+      jobsList.innerHTML = '';
+
+      // Iterate through the job recommendations and format them
+      recommendedJobs.forEach(jobData => {
+        const li = document.createElement('li');
+        const jobTitle = document.createElement('h3');
+        const reasonsList = document.createElement('ul');
+
+        // Add job title
+        jobTitle.textContent = jobData.job;
+        li.appendChild(jobTitle);
+
+        // Add reasons as bullet points
+        jobData.reasons.forEach(reason => {
+          const reasonItem = document.createElement('li');
+          reasonItem.textContent = reason;
+          reasonsList.appendChild(reasonItem);
+        });
+
+        li.appendChild(reasonsList);
+        jobsList.appendChild(li);
+      });
+
+    </script>
+  </body>
 </html>
