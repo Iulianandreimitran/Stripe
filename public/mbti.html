@@ -8,12 +8,22 @@
 <body>
   <h1>Your MBTI Type</h1>
   <p id="mbtiResult"></p>
+  <h2>Recommended Careers</h2>
+  <ul id="jobsList"></ul>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const mbtiType = urlParams.get('mbti');
     document.getElementById('mbtiResult').textContent = mbtiType 
       ? `Your MBTI type is: ${mbtiType}`
       : "No MBTI type found.";
+
+    const recommendedJobs = JSON.parse(sessionStorage.getItem('recommendedJobs')) || [];
+    const jobsList = document.getElementById('jobsList');
+    recommendedJobs.forEach(job => {
+      const li = document.createElement('li');
+      li.textContent = job;
+      jobsList.appendChild(li);
+    });
   </script>
 </body>
 </html>

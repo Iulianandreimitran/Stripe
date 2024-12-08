@@ -20,9 +20,6 @@ app.get('/login', (req, res) => {
 app.get('/redirect', async (req, res) => {
   const { code } = req.query;
 
-  console.log('Received Query:', req.query);
-  console.log('Received Code:', code);
-
   if (!code) {
     return res.status(400).send('No code found in query.');
   }
@@ -37,29 +34,21 @@ app.get('/redirect', async (req, res) => {
       },
     });
 
-    console.log('Facebook Response:', response.data);
-
     if (response.data && response.data.access_token) {
       const accessToken = response.data.access_token;
-      console.log('Access Token:', accessToken);
-
-      // Redirect to the success page and pass the access token
-      res.redirect(`/success.html?access_token=${accessToken}`);
+      // Redirect to success page with the access token
+      return res.redirect(`/success.html?access_token=${accessToken}`);
     } else {
       console.error('No access token found in response');
-      res.status(500).send('Access token not found.');
+      return res.status(500).send('Access token not found.');
     }
   } catch (error) {
     console.error('Error exchanging code for token:', error);
-    // If available, log error response:
-    if (error.response && error.response.data) {
-      console.error('Error details:', error.response.data);
-    }
-    res.status(500).send('Failed to exchange code for access token');
+    return res.status(500).send('Failed to exchange code for access token');
   }
 });
 
-// Start the server
 app.listen(5500, () => {
   console.log('Server is running on port 5500');
 });
+

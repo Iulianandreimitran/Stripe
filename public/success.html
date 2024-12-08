@@ -20,31 +20,15 @@
       color: green;
       text-align: center;
     }
-    button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top:20px;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
   </style>
 </head>
 <body>
-  <h1>Theo Received</h1>
-  <p>We got your access token. Processing MBTI...</p>
-
+  <h1>Access Token Received, Processing...</h1>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token');
     console.log('Access Token:', accessToken);
 
-    // Send the token to Python backend
     fetch('http://localhost:5000/store-token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,7 +38,8 @@
     .then(data => {
       console.log('Response from Python:', data);
       if (data.predicted_mbti) {
-        // Redirect to mbti.html with the MBTI result
+        // Store jobs in sessionStorage
+        sessionStorage.setItem('recommendedJobs', JSON.stringify(data.recommended_jobs));
         window.location.href = `/mbti.html?mbti=${encodeURIComponent(data.predicted_mbti)}`;
       } else {
         alert('Failed to get MBTI. Check backend logs.');
