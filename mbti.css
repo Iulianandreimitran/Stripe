@@ -1,0 +1,71 @@
+/* Importă un font modern de la Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Resetări de bază */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stil pentru body */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    min-height: 100vh;
+}
+
+/* Stil pentru titluri */
+h1, h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2c3e50;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-top: 40px;
+}
+
+/* Stil pentru paragraf */
+#mbtiResult {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: #16a085;
+}
+
+/* Stil pentru lista de joburi */
+#jobsList {
+    list-style: none;
+    max-width: 600px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+#jobsList li {
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 1.2em;
+}
+
+#jobsList li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

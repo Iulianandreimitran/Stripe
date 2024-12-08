@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Page</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    h1 {
+      color: green;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Access Token Received, Processing...</h1>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const accessToken = urlParams.get('access_token');
+    console.log('Access Token:', accessToken);
+
+    fetch('http://localhost:5000/store-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ access_token: accessToken })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Response from Python:', data);
+      if (data.predicted_mbti) {
+        // Store jobs in sessionStorage
+        sessionStorage.setItem('recommendedJobs', JSON.stringify(data.recommended_jobs));
+        window.location.href = `/mbti.html?mbti=${encodeURIComponent(data.predicted_mbti)}`;
+      } else {
+        alert('Failed to get MBTI. Check backend logs.');
+      }
+    })
+    .catch(error => {
+      console.error('Error sending token to Python:', error);
+      alert('Error occurred. Check console.');
+    });
+  </script>
+</body>
+</html>
