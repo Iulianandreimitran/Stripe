@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <script>
+    const appId = "1291328168557869";  
+    // Make sure this matches exactly what's in server.js and in your FB app settings
+    const urlencode = encodeURIComponent("https://bb37-109-166-130-233.ngrok-free.app/redirect");
+    const facebookOAuthURL = `https://www.facebook.com/v21.0/dialog/oauth?client_id=${appId}&redirect_uri=${urlencode}&state=12345`;
+
+    function redirectToFacebookOAuth() {
+      window.location.href = facebookOAuthURL;
+    }
+  </script>
+</head>
+<body>
+  <h1>Welcome to the Home Page</h1>
+  <button onclick="redirectToFacebookOAuth()">Connect to Facebook</button>
+</body>
+</html>

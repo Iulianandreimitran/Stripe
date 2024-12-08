@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MBTI Result</title>
+</head>
+<body>
+  <h1>Your MBTI Type</h1>
+  <p id="mbtiResult"></p>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const mbtiType = urlParams.get('mbti');
+    document.getElementById('mbtiResult').textContent = mbtiType 
+      ? `Your MBTI type is: ${mbtiType}`
+      : "No MBTI type found.";
+  </script>
+</body>
+</html>
